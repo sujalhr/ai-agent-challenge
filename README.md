@@ -4,13 +4,16 @@ An intelligent agent that automatically generates Python parsers for bank statem
 🎯 What It Does
 The agent analyzes your PDF bank statements and CSV examples, then writes custom Python parsers that can extract structured data from similar PDFs. It uses a plan → generate → test → refine loop with up to 3 self-correction attempts.
 🏗️ Architecture
+
 ┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌─────────────┐
 │    Plan     │───▶│  Generate    │───▶│    Test     │───▶│   Decide    │
 │  (Attempt)  │    │    Code      │    │  & Validate │    │ (Retry/End) │
 └─────────────┘    └──────────────┘    └─────────────┘    └─────────────┘
        ▲                                                           │
-       │                        Retry Loop                        │
+       │                        Retry Loop                         │
        └───────────────────────────────────────────────────────────┘
+
+       
 The agent uses LangGraph to orchestrate the workflow, Google Gemini for code generation, and pdfplumber for PDF parsing. Each generated parser is automatically tested against expected output before being finalized.
 📋 Prerequisites
 
